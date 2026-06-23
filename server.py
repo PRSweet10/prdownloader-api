@@ -44,6 +44,7 @@ async def extract_info(request: URLRequest):
             title = info.get('title', 'Unknown Video')
             thumbnail = info.get('thumbnail', '')
             ext = info.get('ext', 'mp4')
+            headers = info.get('http_headers', {})
 
             if not direct_url:
                 raise HTTPException(status_code=400, detail="Could not extract direct URL")
@@ -53,7 +54,8 @@ async def extract_info(request: URLRequest):
                 "title": title,
                 "url": direct_url,
                 "thumbnail": thumbnail,
-                "ext": ext
+                "ext": ext,
+                "headers": headers
             }
             
     except Exception as e:
